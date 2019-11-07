@@ -43,9 +43,14 @@ namespace EventCalendar.Entities
             return isAble;
         }
 
-        public virtual bool IsAddToEventValid()
+        protected virtual bool IsAddToEventValid()
         {
             return true;
+        }
+
+        public bool IsPersonContainedInList(Person person)
+        {
+            return _participants.Contains(person);
         }
     }
 }

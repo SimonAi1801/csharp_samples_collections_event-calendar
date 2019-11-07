@@ -13,12 +13,7 @@ namespace EventCalendar.Entities
             _maxParticipation = maxParticipation;
         }
 
-        public override bool IsAddToEventValid()
-        {
-            return IsPersonAbleToJoin();
-        }
-
-        private bool IsPersonAbleToJoin()
+        protected override bool IsAddToEventValid()
         {
             bool isAble = false;
             if (_participants.Count + 1 <= _maxParticipation)

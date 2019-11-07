@@ -106,7 +106,7 @@ namespace EventCalendar.Logic
             {
                 if (GetEvent(ev.Title) == ev)
                 {
-                   isUnregistered = ev.RemoveParticipant(person);
+                    isUnregistered = ev.RemoveParticipant(person);
                 }
             }
             return isUnregistered;
@@ -132,7 +132,20 @@ namespace EventCalendar.Logic
         public List<Event> GetEventsForPerson(Person person)
         {
             List<Event> events = new List<Event>();
-
+            if (person != null)
+            {
+                foreach (Event ev in _events)
+                {
+                    if (ev.IsPersonContainedInList(person))
+                    {
+                        events.Add(ev);
+                    }
+                }
+            }
+            else
+            {
+                return null;
+            }
             return events;
         }
 
@@ -143,7 +156,7 @@ namespace EventCalendar.Logic
         /// <returns>Anzahl oder 0 im Fehlerfall</returns>
         public int CountEventsForPerson(Person participator)
         {
-            throw new NotImplementedException();
+            return participator.CountEventsForParticipant;
         }
     }
 }
