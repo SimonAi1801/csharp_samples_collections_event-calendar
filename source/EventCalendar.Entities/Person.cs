@@ -11,6 +11,8 @@ namespace EventCalendar.Entities
     /// </summary>
     public class Person
     {
+
+
         public string LastName { get; }
         public string FirstName { get; }
         public string MailAddress { get; set; }
