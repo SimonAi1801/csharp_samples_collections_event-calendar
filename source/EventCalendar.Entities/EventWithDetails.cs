@@ -16,11 +16,12 @@ namespace EventCalendar.Entities
         protected override bool IsAddToEventValid()
         {
             bool isAble = false;
-            if (Participants.Count + 1 <= _maxParticipation)
+            if (_participants.Count + 1 <= _maxParticipation)
             {
                 isAble = true;
             }
             return isAble;
         }
+
     }
 }

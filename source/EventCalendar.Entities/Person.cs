@@ -9,7 +9,7 @@ namespace EventCalendar.Entities
     /// Person kann sowohl zu einer Veranstaltung einladen,
     /// als auch an Veranstaltungen teilnehmen
     /// </summary>
-    public class Person : IComparable
+    public class Person
     {
         private readonly List<Event> _events;
 
@@ -20,8 +20,6 @@ namespace EventCalendar.Entities
 
         public int CountEventsForParticipant => _events.Count;
 
-        public string FullName => $"{FirstName} {LastName}";
-
         public Person(string lastName, string firstName)
         {
             LastName = lastName;
@@ -29,56 +27,12 @@ namespace EventCalendar.Entities
             _events = new List<Event>();
         }
 
-        public void AddPersonToEvent(Event ev)
+        public void AddpersonToEvent(Event ev)
         {
             if (!(_events.Contains(ev)))
             {
                 _events.Add(ev);
             }
-        }
-
-        public void RemovePersonFromEvent(Event ev)
-        {
-            if (_events.Contains(ev))
-            {
-                _events.Remove(ev);
-            }
-        }
-
-        //public List<Person> GetParticipantsOfEvent(Event ev)
-        //{
-        //    List<Person> participants = null;
-        //    if (_events.Contains(ev))
-        //    {
-        //        participants = new List<Person>();
-
-        //        foreach (Event myEvent in _events)
-        //        {
-        //            if (myEvent == ev)
-        //            {
-        //                participants = myEvent.Participants;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return participants;
-        //}
-
-        public int CompareTo(object obj)
-        {
-            var person = obj as Person;
-            int value;
-
-            if (person == null)
-            {
-                throw new AggregateException("Invalid type!");
-            }
-            value = CountEventsForParticipant.CompareTo(person.CountEventsForParticipant) * -1;
-            if (value == 0)
-            {
-                value = FullName.CompareTo(person.FullName);
-            }
-            return value;
         }
     }
 }
