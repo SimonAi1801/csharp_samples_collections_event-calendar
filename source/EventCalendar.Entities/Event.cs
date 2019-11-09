@@ -12,6 +12,7 @@ namespace EventCalendar.Entities
 
         public int Count => _participants.Count;
         public string Title => _title;
+        public List<Person> Participants => _participants;
 
         public Event(Person invitor, string title, DateTime dateTime)
         {
@@ -43,14 +44,14 @@ namespace EventCalendar.Entities
             return isAble;
         }
 
-        protected virtual bool IsAddToEventValid()
-        {
-            return true;
-        }
-
         public bool IsPersonContainedInList(Person person)
         {
             return _participants.Contains(person);
+        }
+
+        protected virtual bool IsAddToEventValid()
+        {
+            return true;
         }
     }
 }
