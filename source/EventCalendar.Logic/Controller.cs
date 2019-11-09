@@ -88,6 +88,10 @@ namespace EventCalendar.Logic
                 if (GetEvent(ev.Title) == ev)
                 {
                     isRegisterd = ev.AddParticipant(person);
+                    if (isRegisterd)
+                    {
+                        person.AddPersonToEvent(ev);
+                    }
                 }
             }
             return isRegisterd;
@@ -107,6 +111,10 @@ namespace EventCalendar.Logic
                 if (GetEvent(ev.Title) == ev)
                 {
                     isUnregistered = ev.RemoveParticipant(person);
+                    if (isUnregistered)
+                    {
+                        person.RemovePersonFromEvent(ev);
+                    }
                 }
             }
             return isUnregistered;
@@ -121,7 +129,13 @@ namespace EventCalendar.Logic
         /// <returns>Liste der Teilnehmer oder null im Fehlerfall</returns>
         public IList<Person> GetParticipatorsForEvent(Event ev)
         {
-            throw new NotImplementedException();
+            List<Person> persons = null;
+            if (ev != null)
+            {
+                persons = ev.Participants;
+                persons.Sort();
+            }
+            return persons;
         }
 
         /// <summary>
@@ -156,7 +170,11 @@ namespace EventCalendar.Logic
         /// <returns>Anzahl oder 0 im Fehlerfall</returns>
         public int CountEventsForPerson(Person participator)
         {
-            return participator.CountEventsForParticipant;
+            if (participator != null)
+            {
+                return participator.CountEventsForParticipant;
+            }
+            return 0;
         }
     }
 }

@@ -8,10 +8,11 @@ namespace EventCalendar.Entities
         private Person _invitor;
         private string _title;
         private DateTime _dateTime;
-        protected readonly List<Person> _participants;
+        private readonly List<Person> _participants;
 
         public int Count => _participants.Count;
         public string Title => _title;
+        public List<Person> Participants => _participants;
 
         public Event(Person invitor, string title, DateTime dateTime)
         {
@@ -43,14 +44,24 @@ namespace EventCalendar.Entities
             return isAble;
         }
 
-        protected virtual bool IsAddToEventValid()
-        {
-            return true;
-        }
-
         public bool IsPersonContainedInList(Person person)
         {
             return _participants.Contains(person);
+        }
+
+        //public List<Person> GetParticipantsOfEvent()
+        //{
+        //    List<Person> persons = new List<Person>();
+        //    if ()
+        //    {
+
+        //    }
+        //    return persons;
+        //}
+
+        protected virtual bool IsAddToEventValid()
+        {
+            return true;
         }
     }
 }
