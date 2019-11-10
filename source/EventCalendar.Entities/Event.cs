@@ -25,7 +25,7 @@ namespace EventCalendar.Entities
         public bool AddParticipant(Person participant)
         {
             bool isAble = false;
-            if (!(_participants.Contains(participant)) && IsAddToEventValid())
+            if (!(_participants.Contains(participant)) && IsAddToValid())
             {
                 _participants.Add(participant);
                 isAble = true;
@@ -49,7 +49,7 @@ namespace EventCalendar.Entities
             return _participants.Contains(person);
         }
 
-        protected virtual bool IsAddToEventValid()
+        protected virtual bool IsAddToValid()
         {
             return true;
         }

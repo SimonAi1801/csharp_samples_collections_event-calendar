@@ -13,7 +13,7 @@ namespace EventCalendar.Entities
             _maxParticipation = maxParticipation;
         }
 
-        protected override bool IsAddToEventValid()
+        protected override bool IsAddToValid()
         {
             bool isAble = false;
             if (_participants.Count + 1 <= _maxParticipation)
@@ -22,6 +22,5 @@ namespace EventCalendar.Entities
             }
             return isAble;
         }
-
     }
 }
