@@ -37,19 +37,19 @@ namespace EventCalendar.Logic
                 return false;
             }
 
-            if (DateTime.Now < dateTime && GetEvent(title) == null)
+            if (dateTime.CompareTo(DateTime.Now) > 0 && GetEvent(title) == null)
             {
-                isCreated = true;
+                Event newEvent;
                 if (maxParticipators == 0)
                 {
-                    Event newEvent = new Event(invitor, title, dateTime);
-                    _events.Add(newEvent);
+                    newEvent = new Event(invitor, title, dateTime);
                 }
                 else
                 {
-                    Event newEvent = new EventWithDetails(invitor, title, dateTime, maxParticipators);
-                    _events.Add(newEvent);
+                    newEvent = new EventWithDetails(invitor, title, dateTime, maxParticipators);
                 }
+                _events.Add(newEvent);
+                isCreated = true;
             }
             return isCreated;
         }
@@ -64,7 +64,7 @@ namespace EventCalendar.Logic
             Event myEvent = null;
             foreach (Event item in _events)
             {
-                if (title == item.Title)
+                if (item.Title.Equals(title, StringComparison.CurrentCultureIgnoreCase))
                 {
                     myEvent = item;
                     break;
@@ -85,7 +85,7 @@ namespace EventCalendar.Logic
             bool isRegisterd = false;
             if (ev != null && person != null)
             {
-                if (GetEvent(ev.Title) == ev)
+                if (GetEvent(ev.Title).Equals(ev))
                 {
                     isRegisterd = ev.AddParticipant(person);
                     if (isRegisterd)
@@ -108,7 +108,7 @@ namespace EventCalendar.Logic
             bool isUnregistered = false;
             if (ev != null && person != null)
             {
-                if (GetEvent(ev.Title) == ev)
+                if (GetEvent(ev.Title).Equals(ev))
                 {
                     isUnregistered = ev.RemoveParticipant(person);
                     if (isUnregistered)

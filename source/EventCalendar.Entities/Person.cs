@@ -9,7 +9,7 @@ namespace EventCalendar.Entities
     /// Person kann sowohl zu einer Veranstaltung einladen,
     /// als auch an Veranstaltungen teilnehmen
     /// </summary>
-    public class Person : IComparable
+    public class Person : IComparable<Person>
     {
         private readonly List<Event> _events;
 
@@ -43,17 +43,20 @@ namespace EventCalendar.Entities
             }
         }
 
-        public int CompareTo(object obj)
+        int IComparable<Person>.CompareTo(Person other)
         {
-            var person = obj as Person;
-            if (person == null)
+            if (other == null)
             {
                 throw new AggregateException("Invalid type!!");
             }
-            int value = CountEventsForParticipant.CompareTo(person.CountEventsForParticipant) * -1;
-            if (value == 0)
+            int value;
+            if (CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) == 0)
             {
-                value = FullName.CompareTo(person.FullName);
+                value = FullName.CompareTo(other.FullName);
+            }
+            else
+            {
+                value = CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) * -1;
             }
             return value;
         }
