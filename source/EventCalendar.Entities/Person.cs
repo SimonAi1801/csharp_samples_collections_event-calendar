@@ -52,7 +52,14 @@ namespace EventCalendar.Entities
             int value;
             if (CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) == 0)
             {
-                value = FullName.CompareTo(other.FullName);
+                if (LastName.CompareTo(other.LastName) == 0)
+                {
+                    return FirstName.CompareTo(other.FirstName);
+                }
+                else
+                {
+                    return LastName.CompareTo(other.LastName);
+                }
             }
             else
             {

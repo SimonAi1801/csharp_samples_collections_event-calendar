@@ -7,6 +7,7 @@ namespace EventCalendar.Entities
     public class EventWithDetails : Event
     {
         private int _maxParticipation;
+
         public EventWithDetails(Person invitor, string title, DateTime dateTime, int maxParticipation)
             : base(invitor, title, dateTime)
         {
