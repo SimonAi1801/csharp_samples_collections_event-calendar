@@ -17,7 +17,6 @@ namespace EventCalendar.Entities
         public string FirstName { get; }
         public string MailAddress { get; set; }
         public string PhoneNumber { get; set; }
-        public string FullName => $"{FirstName} {LastName}";
         public int CountEventsForParticipant => _events.Count;
 
         public Person(string lastName, string firstName)
