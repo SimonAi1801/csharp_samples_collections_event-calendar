@@ -48,7 +48,7 @@ namespace EventCalendar.Entities
             {
                 throw new AggregateException("Invalid type!!");
             }
-            int value;
+
             if (CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) == 0)
             {
                 if (LastName.CompareTo(other.LastName) == 0)
@@ -60,11 +60,7 @@ namespace EventCalendar.Entities
                     return LastName.CompareTo(other.LastName);
                 }
             }
-            else
-            {
-                value = CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) * -1;
-            }
-            return value;
+            return CountEventsForParticipant.CompareTo(other.CountEventsForParticipant) * -1;
         }
     }
 }
